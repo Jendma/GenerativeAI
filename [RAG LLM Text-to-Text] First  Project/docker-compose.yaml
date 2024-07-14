@@ -1,0 +1,11 @@
+#docker-compose.yml
+version: '3'
+services:
+  openapi-app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./Tulus_Setiawan_CV.pdf:/app/Tulus_Setiawan_CV.pdf
