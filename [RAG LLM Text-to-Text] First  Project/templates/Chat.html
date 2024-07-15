@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Tulus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #343541;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #chat-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+        }
+        .message {
+            max-width: 90%;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background-color: #5c5e6f;
+            align-self: flex-end;
+        }
+        .system-message {
+            background-color: #444654;
+            align-self: flex-start;
+        }
+        #chat-form {
+            display: flex;
+            padding: 20px 0;
+            border-top: 1px solid #565869;
+        }
+        textarea {
+            flex-grow: 1;
+            background-color: #40414f;
+            color: #ffffff;
+            border: 1px solid #565869;
+            border-radius: 5px;
+            padding: 10px;
+            resize: none;
+        }
+        input[type="submit"] {
+            background-color: #5c5e6f;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chat with Tulus</h1>
+        <div id="chat-container">
+            {% for message in chat_history %}
+                <div class="message {% if message.type == 'user' %}user-message{% else %}system-message{% endif %}">
+                    {% if message.type == 'user' %}
+                        {{ message.content }}
+                    {% else %}
+                        {{ message.content|safe }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <form method="POST" id="chat-form">
+            <textarea name="user_input" placeholder="Enter your query here..." rows="3"></textarea>
+            <input type="submit" value="Send">
+        </form>
+    </div>
+
+    <script>
+        function scrollToBottom() {
+            var chatContainer = document.getElementById('chat-container');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        document.addEventListener('DOMContentLoaded', scrollToBottom);
+
+        document.getElementById('chat-form').addEventListener('submit', function(e) {
+            setTimeout(scrollToBottom, 100);
+        });
+    </script>
+</body>
+</html>

@@ -36,14 +36,24 @@ def RAG_system():
 
 qa_chain = RAG_system()
 
+chat_history = []
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    global chat_history
     if request.method == 'POST':
         user_input = request.form['user_input']
+        chat_history.append({"type": "user", "content": user_input})
+
+        # process the query
         response = qa_chain({"question": user_input})
-        return render_template('index.html', response=response['answer'])
+        ai_response = response['answer']
+
+        chat_history.append({"type": "system", "content": ai_response})
+        
+        return render_template('Chat.html', chat_history=chat_history)
     
-    return render_template('index.html')
+    return render_template('Chat.html', chat_history=chat_history)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
