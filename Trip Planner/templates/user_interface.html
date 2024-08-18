@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacation Planner Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-blue-100">
+    <!-- Header -->
+    <div class="w-full bg-blue-100 fixed top-0 z-10">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold p-3">Vacation Planner Assistant</h1>
+        </div>
+    </div>
+    
+    <div class="container mx-auto p-4 mt-16 mb-20">
+        <div id="chat-container" class="bg-white rounded-lg shadow-md p-4 ">
+            <div class="space-y-4">
+                <p class="inline-block bg-gray-200 text-gray-800 rounded-lg py-2 px-4">Hi, what are your upcoming vacation plans?</p>
+
+                {% for message in chat_history %}
+                <div class="mb-4 {% if message.type == 'user' %}text-right{% endif %}">
+                    <span class="inline-block {% if message.type == 'user' %}bg-blue-500 text-white{% else %}bg-gray-200 text-gray-800{% endif %} rounded-lg py-2 px-4">
+                        {% if message.type == 'user' %}
+                            {{ message.content }}
+                        {% else %}
+                        <div class="flex">
+                            <div class="w-1/3 space-y-2">
+                                {% if message.image_url1 %}
+                                    <img src="{{ message.image_url1 }}" alt="Generated Vacation Image" class="w-full h-auto rounded-lg">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/150" alt="Placeholder" class="w-full h-auto rounded-lg">
+                                {% endif %}
+                                {% if message.image_url2 %}
+                                    <img src="{{ message.image_url2 }}" alt="Generated Vacation Image" class="w-full h-auto rounded-lg">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/150" alt="Placeholder" class="w-full h-auto rounded-lg">
+                                {% endif %}
+                            </div>
+                            <div class="w-2/3 pl-4">
+                                {{ message.content|safe }}
+                                <a href="https://www.traveloka.com" target="_blank" class="block mt-2 bg-orange-500 text-white py-2 px-4 rounded-lg text-center">Book on Traveloka</a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <div class="w-full bg-blue-100 fixed bottom-0 z-10">
+        <div class="container mx-auto">
+            <form method="POST" class="border-gray-200 flex bg-blue-100 p-3">
+                <input type="text" name="user_input" placeholder="Enter your query here..." class="flex-grow border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Send</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+flask
+langchain>=0.0.184
+langchain_core
+langchain_community
+python-dotenv
+langchain-openai
+markdown
+regex
