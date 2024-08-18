@@ -138,4 +138,9 @@ docker-compose up --build
 
 # The Result
 Vacation Planner Assistant
-<video controls src="Demo Video.mp4" title="Demo Video of Vacation Planner Assistant"></video>
+![image](https://github.com/user-attachments/assets/6d7489f2-ae52-4135-ad8c-87ba849bea90)
+![image](https://github.com/user-attachments/assets/7eef76fb-aaf0-47df-b638-e7065fcf2afc)
+![image](https://github.com/user-attachments/assets/50982736-36c2-45bf-be66-5b1bed16bff9)
+![image](https://github.com/user-attachments/assets/5a91279f-fc11-4c1c-a13b-e5ad740ddcf5)
+
+
