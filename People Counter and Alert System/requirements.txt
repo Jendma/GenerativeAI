@@ -1,0 +1,5 @@
+ultralytics
+opencv-python
+python-time
+tkinter-page
+numpy
